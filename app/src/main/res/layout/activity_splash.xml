@@ -13,6 +13,7 @@
         android:layout_marginBottom="25dp"
         android:text="Find the sun\nin your City!"
         android:textSize="42sp"
+        android:fontFamily="@font/poppins_regular"
         app:layout_constraintBottom_toTopOf="@id/desc" />
 
     <TextView
@@ -21,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="28dp"
         android:gravity="center"
+        android:fontFamily="@font/poppins_regular"
         android:text="It’s a pleasure to keeptrack of the\nweather with the new app"
         android:textSize="13sp"
         app:layout_constraintBottom_toTopOf="@id/started" />
@@ -29,13 +31,15 @@
         android:id="@+id/started"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_regular"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="90dp"
         android:padding="18dp"
         android:text="Get Started"
         android:textAllCaps="false"
-        android:textColor="@color/purple_500"
-        app:cornerRadius="8dp"
+        android:textColor="@color/purple"
+        app:cornerRadius="12dp"
         app:layout_constraintBottom_toBottomOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
