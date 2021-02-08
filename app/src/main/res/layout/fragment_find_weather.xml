@@ -53,7 +53,7 @@
         android:fontFamily="@font/poppins_regular"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="90dp"
+        android:layout_marginBottom="40dp"
         android:padding="18dp"
         android:text="Find your City"
         android:textAllCaps="false"
@@ -64,5 +64,13 @@
         app:iconGravity="end"
         app:iconTint="@color/purple"
         app:layout_constraintBottom_toBottomOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        tools:listitem="@layout/item_temperature"/>
 
 </LinearLayout>
