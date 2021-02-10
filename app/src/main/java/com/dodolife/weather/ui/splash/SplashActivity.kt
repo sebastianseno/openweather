@@ -5,14 +5,13 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.dodolife.weather.databinding.ActivitySplashBinding
-import com.dodolife.weather.extensions.checkSinglePermission
 import com.dodolife.weather.modules.BaseActivity
 import com.dodolife.weather.ui.main.MainActivity
 
 class SplashActivity : BaseActivity() {
-
 
     private val binding by viewBinding(ActivitySplashBinding::inflate)
 
@@ -20,19 +19,19 @@ class SplashActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val permList = arrayOf(
-            Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.ACCESS_COARSE_LOCATION
-        )
-
         binding.started.setOnClickListener {
-            checkLocationPermissionAPI28(102)
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+//            checkLocationPermissionAPI28(102)
         }
+
     }
 
-    fun Context.checkLocationPermissionAPI28(locationRequestCode : Int) {
+
+    fun Context.checkLocationPermissionAPI28(locationRequestCode: Int) {
         if (!checkSinglePermission(Manifest.permission.ACCESS_FINE_LOCATION) ||
-            !checkSinglePermission(Manifest.permission.ACCESS_COARSE_LOCATION)) {
+            !checkSinglePermission(Manifest.permission.ACCESS_COARSE_LOCATION)
+        ) {
             val permList = arrayOf(
                 Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION
@@ -41,17 +40,32 @@ class SplashActivity : BaseActivity() {
         }
     }
 
-    private fun Context.checkSinglePermission(permission: String) : Boolean {
-        return ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED
+    private fun Context.checkSinglePermission(permission: String): Boolean {
+        return ContextCompat.checkSelfPermission(
+            this,
+            permission
+        ) == PackageManager.PERMISSION_GRANTED
     }
 
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        val permList = arrayOf(
-            Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.ACCESS_COARSE_LOCATION
-        )
-
+        when (requestCode) {
+            102 -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                } else {
+                    Toast.makeText(
+                        this, "Permission denied to read your External storage",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                return
+            }
+        }
     }
 }

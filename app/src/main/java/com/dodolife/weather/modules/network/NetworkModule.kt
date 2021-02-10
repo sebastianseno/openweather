@@ -3,6 +3,9 @@ package com.dodolife.weather.modules.network
 import android.content.Context
 import android.util.Log
 import com.dodolife.weather.BuildConfig
+import com.dodolife.weather.R
+import com.dodolife.weather.services.entity.WeatherData
+import com.dodolife.weather.services.rest.WeatherServices
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
@@ -60,7 +63,7 @@ class NetworkModule {
         okHttpClient: OkHttpClient
     ): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("context.getString(R.string.server_url)")
+            .baseUrl(context.getString(R.string.base_url))
             .addConverterFactory(jsonChecker)
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .addConverterFactory(GsonConverterFactory.create())
@@ -89,22 +92,11 @@ class NetworkModule {
         }
         return builder.build()
     }
-//
-//    @Provides
-//    @Singleton
-//    fun providesAuthServices(retrofit: Retrofit): AuthServices {
-//        return retrofit.create(AuthServices::class.java)
-//    }
-//
-//    @Provides
-//    @Singleton
-//    fun providesMainServices(retrofit: Retrofit): MainServices {
-//        return retrofit.create(MainServices::class.java)
-//    }
-//
-//    @Provides
-//    @Singleton
-//    fun providesTvServices(retrofit: Retrofit): TvServices {
-//        return retrofit.create(TvServices::class.java)
-//    }
+
+    @Provides
+    @Singleton
+    fun providesWeatherServices(retrofit: Retrofit): WeatherServices {
+        return retrofit.create(WeatherServices::class.java)
+    }
+
 }
