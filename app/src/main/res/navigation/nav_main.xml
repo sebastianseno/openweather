@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/findWeatherFragment">
+
+    <fragment
+        android:id="@+id/findWeatherFragment"
+        android:name="com.dodolife.weather.ui.main.FindWeatherFragment"
+        tools:layout="@layout/fragment_find_weather" >
+        <action
+            android:id="@+id/action_findWeatherFragment_to_weatherDetailFragment"
+            app:destination="@id/weatherDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/weatherDetailFragment"
+        android:name="com.dodolife.weather.ui.main.WeatherDetailFragment"
+        tools:layout="@layout/fragment_weather_detail" />
+
+
+</navigation>
