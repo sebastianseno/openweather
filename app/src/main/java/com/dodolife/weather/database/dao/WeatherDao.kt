@@ -13,7 +13,7 @@ interface WeatherDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertWeatherData(obj: WeatherDb)
 
-    @Query("SELECT * FROM WeatherDb")
+    @Query("SELECT * FROM WeatherDb ORDER BY date DESC")
     fun getWeather(): LiveData<List<WeatherDb>>
 
     @Query("SELECT * FROM WeatherDb WHERE id = :id")
