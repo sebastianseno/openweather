@@ -10,13 +10,14 @@ import com.dodolife.weather.database.entity.WeatherDb
 @Dao
 interface WeatherDao {
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertWeatherData(obj: WeatherDb)
 
-    @Query("SELECT * FROM WeatherDb WHERE description LIKE :name")
-    fun searchStudentsName(name: String?): LiveData<List<WeatherDb>>
+    @Query("SELECT * FROM WeatherDb")
+    fun getWeather(): LiveData<List<WeatherDb>>
 
-    @Query("DELETE FROM WeatherDb WHERE feelsLike = :nim")
-    fun deleteStudent(nim: Long)
+    @Query("SELECT * FROM WeatherDb WHERE id = :id")
+    fun findWeather(id: Int): LiveData<WeatherDb>
+
 
 }

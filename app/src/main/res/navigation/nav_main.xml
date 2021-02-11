@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/findWeatherFragment"
-        android:name="com.dodolife.weather.ui.main.FindWeatherFragment"
+        android:name="com.dodolife.weather.ui.weather.FindWeatherFragment"
         tools:layout="@layout/fragment_find_weather" >
         <action
             android:id="@+id/action_findWeatherFragment_to_weatherDetailFragment"
@@ -15,8 +15,12 @@
     </fragment>
     <fragment
         android:id="@+id/weatherDetailFragment"
-        android:name="com.dodolife.weather.ui.main.WeatherDetailFragment"
-        tools:layout="@layout/fragment_weather_detail" />
+        android:name="com.dodolife.weather.ui.weather.WeatherDetailFragment"
+        tools:layout="@layout/fragment_weather_detail" >
+        <argument
+            app:argType="integer"
+            android:name="id_weather" />
+    </fragment>
 
 
 </navigation>

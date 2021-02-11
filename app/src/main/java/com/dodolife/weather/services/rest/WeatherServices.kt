@@ -10,6 +10,7 @@ interface WeatherServices {
     suspend fun getWeatherLatLong(
         @Query("lat") lat: Double,
         @Query("lon") lon: Double,
+        @Query("units") units: String = "metric",
         @Query("appid") appid: String
     ): WeatherData
 

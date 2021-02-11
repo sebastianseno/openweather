@@ -8,10 +8,12 @@ data class WeatherDb (
     @PrimaryKey(autoGenerate = true)
     val id : Int,
     val main: String,
+    val name: String,
     val description: String,
     val feelsLike: Double,
-    val humidity: Int,
-    val pressure: Int,
+    val humidity: Double,
+    val pressure: Double,
+    val date: Long,
     val temp: Double,
     val tempMax: Double,
     val tempMin: Double

@@ -1,4 +1,4 @@
-package com.dodolife.weather.ui.main
+package com.dodolife.weather.ui.weather
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -11,7 +11,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import com.dodolife.weather.R
+import com.dodolife.weather.database.entity.WeatherDb
 import com.dodolife.weather.databinding.FragmentFindWeatherBinding
 import com.dodolife.weather.modules.BaseFragment
 import com.dodolife.weather.modules.viewBinding
@@ -26,6 +29,16 @@ class FindWeatherFragment : BaseFragment() {
 
     private val binding by viewBinding(FragmentFindWeatherBinding::bind)
 
+    private val adapter by lazy(LazyThreadSafetyMode.NONE) {
+        WeatherAdapter(::onClick)
+    }
+
+    private fun onClick(id: Int) {
+        findNavController().navigate(
+            FindWeatherFragmentDirections.actionFindWeatherFragmentToWeatherDetailFragment(id)
+        )
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,6 +49,10 @@ class FindWeatherFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.recyler.adapter = adapter
+        binding.recyler.setHasFixedSize(true)
+        binding.recyler.layoutManager = GridLayoutManager(requireContext(), 2)
+
         fusedLocationClient = FusedLocationProviderClient(requireActivity())
 
         val permList = arrayOf(
@@ -45,6 +62,12 @@ class FindWeatherFragment : BaseFragment() {
         binding.started.setOnClickListener {
             requestPermissions(permList, 102)
         }
+
+        observe(viewModel.allWeather, ::updateWeather)
+    }
+
+    private fun updateWeather(list: List<WeatherDb>?) {
+        adapter.items = list?.toMutableList() ?: mutableListOf()
     }
 
     @SuppressLint("MissingPermission")
@@ -60,7 +83,6 @@ class FindWeatherFragment : BaseFragment() {
                     fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
                         viewModel.getWeatherLatLong(location?.latitude, location?.longitude, getString(
                             R.string.api_id))
-                        Log.d("senooo", location?.latitude.toString())
                     }
                 }
             }

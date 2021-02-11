@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".ui.main.FindWeatherFragment">
+    tools:context=".ui.weather.FindWeatherFragment">
 
     <TextView
         android:layout_width="match_parent"
@@ -53,7 +53,7 @@
         android:fontFamily="@font/poppins_regular"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="35dp"
         android:padding="18dp"
         android:text="Find your City"
         android:textAllCaps="false"
@@ -69,6 +69,8 @@
         android:id="@+id/recyler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
         android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         tools:listitem="@layout/item_temperature"/>

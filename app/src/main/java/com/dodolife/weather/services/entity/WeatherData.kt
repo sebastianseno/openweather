@@ -11,7 +11,7 @@ data class WeatherData(
     @SerializedName("coord")
     val coord: Coord,
     @SerializedName("dt")
-    val dt: Int,
+    val dt: Long,
     @SerializedName("id")
     val id: Int,
     @SerializedName("main")
@@ -46,9 +46,9 @@ data class Main(
     @SerializedName("feels_like")
     val feelsLike: Double,
     @SerializedName("humidity")
-    val humidity: Int,
+    val humidity: Double,
     @SerializedName("pressure")
-    val pressure: Int,
+    val pressure: Double,
     @SerializedName("temp")
     val temp: Double,
     @SerializedName("temp_max")

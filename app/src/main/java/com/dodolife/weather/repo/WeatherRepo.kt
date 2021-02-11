@@ -1,5 +1,6 @@
 package com.dodolife.weather.repo
 
+import androidx.lifecycle.LiveData
 import com.dodolife.weather.database.KraDb
 import com.dodolife.weather.database.dao.WeatherDao
 import com.dodolife.weather.database.entity.WeatherDb
@@ -17,11 +18,19 @@ class WeatherRepo @Inject constructor(
 
     private val weatherDao: WeatherDao = kraDb.weatherDao()
 
-    suspend fun getWeather(latitude: Double, longitude: Double, key: String) = withContext(Dispatchers.IO) {
-        val response = with(weatherServices.getWeatherLatLong(latitude, longitude, key)) {
+    fun getWeather(): LiveData<List<WeatherDb>> {
+        return weatherDao.getWeather()
+    }
+
+    fun findWeather(id:Int): LiveData<WeatherDb> {
+        return weatherDao.findWeather(id)
+    }
+
+    suspend fun refreshWeather(latitude: Double, longitude: Double, key: String) = withContext(Dispatchers.IO) {
+        val response = with(weatherServices.getWeatherLatLong(latitude, longitude,"metric", key)) {
             WeatherDb(
-                id, weather[0].main, weather[0].description, main.feelsLike, main.humidity, main.pressure,
-                main.temp, main.tempMax, main.tempMin
+                id, weather[0].main, name, weather[0].description, main.feelsLike, main.humidity, main.pressure,
+                dt, main.temp, main.tempMax, main.tempMin
             )
         }
         weatherDao.insertWeatherData(response)

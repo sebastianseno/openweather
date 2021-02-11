@@ -8,7 +8,7 @@ import com.dodolife.weather.database.entity.WeatherDb
 
 @Database(
     entities = [WeatherDb::class],
-    version = 1
+    version = 3
 )
 
 abstract class KraDb : RoomDatabase() {
