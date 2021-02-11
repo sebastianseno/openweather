@@ -14,4 +14,11 @@ interface WeatherServices {
         @Query("appid") appid: String
     ): WeatherData
 
+    @GET("weather")
+    suspend fun getWeatherCity(
+       @Query("q") city: String,
+        @Query("units") units: String = "metric",
+        @Query("appid") appid: String
+    ): WeatherData
+
 }

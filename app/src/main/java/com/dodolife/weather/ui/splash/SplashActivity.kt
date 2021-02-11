@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import com.dodolife.weather.databinding.ActivitySplashBinding
 import com.dodolife.weather.modules.BaseActivity
@@ -19,10 +20,10 @@ class SplashActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        binding.started.setOnClickListener {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        binding.startedButton?.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
-//            checkLocationPermissionAPI28(102)
         }
 
     }

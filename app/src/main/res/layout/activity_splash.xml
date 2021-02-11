@@ -35,10 +35,10 @@
         android:fontFamily="@font/poppins_regular"
         android:text="It’s a pleasure to keeptrack of the\nweather with the new app"
         android:textSize="13sp"
-        app:layout_constraintBottom_toTopOf="@id/started" />
+        app:layout_constraintBottom_toTopOf="@id/startedButton" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/started"
+        android:id="@+id/startedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_regular"

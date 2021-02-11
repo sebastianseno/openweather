@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_findWeatherFragment_to_weatherDetailFragment"
             app:destination="@id/weatherDetailFragment" />
+        <action
+            android:id="@+id/action_findWeatherFragment_to_inputCityBottomSheetFragment"
+            app:destination="@id/inputCityBottomSheetFragment" />
     </fragment>
     <fragment
         android:id="@+id/weatherDetailFragment"
@@ -21,6 +24,12 @@
             app:argType="integer"
             android:name="id_weather" />
     </fragment>
+
+    <dialog
+        android:id="@+id/inputCityBottomSheetFragment"
+        android:name="com.dodolife.weather.ui.weather.InputCityBottomSheetFragment"
+        android:label="fragment_input_city_bottom_sheet"
+        tools:layout="@layout/fragment_input_city_bottom_sheet" />
 
 
 </navigation>

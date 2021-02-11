@@ -5,7 +5,6 @@ import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -59,7 +58,13 @@ class FindWeatherFragment : BaseFragment() {
             Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.ACCESS_COARSE_LOCATION
         )
-        binding.started.setOnClickListener {
+        binding.findCityButton?.setOnClickListener {
+            findNavController().navigate(
+                FindWeatherFragmentDirections.actionFindWeatherFragmentToInputCityBottomSheetFragment()
+            )
+        }
+
+        binding.findLatLongButton.setOnClickListener {
             requestPermissions(permList, 102)
         }
 

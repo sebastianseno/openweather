@@ -28,7 +28,7 @@
         android:text="Select a city or country to\nsee the weather" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/started"
+        android:id="@+id/find_lat_long_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_regular"
@@ -47,6 +47,7 @@
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/findCityButton"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

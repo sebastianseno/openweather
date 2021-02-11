@@ -27,4 +27,14 @@ class WeatherViewModels @ViewModelInject constructor(
             }
         }
     }
+
+    fun getWeatherLatLong(city: String, key: String) {
+        viewModelScope.launch {
+            try {
+                repo.refreshWeatherByCity(city, key)
+            } catch (error: Exception) {
+
+            }
+        }
+    }
 }
