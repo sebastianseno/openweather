@@ -3,6 +3,7 @@ package com.dodolife.weather.ui.weather
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.dodolife.weather.database.entity.WeatherDb
 import com.dodolife.weather.databinding.ItemTemperatureBinding
 import com.dodolife.weather.extensions.toDateFormat
@@ -42,6 +43,7 @@ class WeatherAdapter(
         }
         fun bind(data: WeatherDb) {
             containerView.apply {
+                icon.load("https://openweathermap.org/img/wn/${data.icon}.png")
                 temp.text = data.temp.toCelciusFormat()
                 date.text = data.date.toDateFormat()
                 city.text = data.name

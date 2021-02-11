@@ -1,11 +1,13 @@
 package com.dodolife.weather.ui.weather
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import coil.load
 import com.dodolife.weather.databinding.FragmentWeatherDetailBinding
 import com.dodolife.weather.extensions.toDateFormat
 import com.dodolife.weather.extensions.toCelciusFormat
@@ -34,6 +36,7 @@ class WeatherDetailFragment : BaseFragment() {
         viewModel.weatherId.value = args.idWeather
 
         observeNonNull(viewModel.findWeather) {
+            binding.weatherIcon?.load("https://openweathermap.org/img/wn/${it.icon}@2x.png")
             binding.city.text = it.name
             binding.date.text = it.date.toDateFormat()
             binding.temperature.text = it.temp.toCelciusFormat()

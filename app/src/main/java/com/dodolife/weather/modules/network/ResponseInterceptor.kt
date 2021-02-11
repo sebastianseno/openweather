@@ -46,9 +46,9 @@ object ResponseInterceptor : Interceptor {
         }
         val errorBody = getError<ErrorData>(response.body)
         if (errorBody != null) {
-            val message = errorBody.error?.errors?.get(0)
+            val message = errorBody.message
             val exception = java.io.IOException(message)
-            Log.e("privyApp", "error response: ", exception)
+            Log.e("ups", "error response: ", exception)
             throw exception
         }
     }

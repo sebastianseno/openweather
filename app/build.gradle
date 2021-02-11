@@ -91,4 +91,5 @@ dependencies {
     implementation "androidx.fragment:fragment-ktx:$fragment_version"
     implementation "com.google.android.gms:play-services-location:15.0.1"
 
+    implementation("io.coil-kt:coil:1.1.1")
 }

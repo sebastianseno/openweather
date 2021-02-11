@@ -29,7 +29,7 @@ class WeatherRepo @Inject constructor(
     suspend fun refreshWeather(latitude: Double, longitude: Double, key: String) = withContext(Dispatchers.IO) {
         val response = with(weatherServices.getWeatherLatLong(latitude, longitude,"metric", key)) {
             WeatherDb(
-                id, weather[0].main, name, weather[0].description, main.feelsLike, main.humidity, main.pressure,
+                id, weather[0].main, name, weather[0].icon, weather[0].description,  main.feelsLike, main.humidity, main.pressure,
                 dt, main.temp, main.tempMax, main.tempMin
             )
         }
@@ -39,7 +39,7 @@ class WeatherRepo @Inject constructor(
     suspend fun refreshWeatherByCity(city:String, key: String) = withContext(Dispatchers.IO) {
         val response = with(weatherServices.getWeatherCity(city,"metric", key)) {
             WeatherDb(
-                id, weather[0].main, name, weather[0].description, main.feelsLike, main.humidity, main.pressure,
+                id, weather[0].main, name,weather[0].icon, weather[0].description, main.feelsLike, main.humidity, main.pressure,
                 dt, main.temp, main.tempMax, main.tempMin
             )
         }

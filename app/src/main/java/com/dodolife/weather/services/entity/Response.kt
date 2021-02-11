@@ -8,11 +8,6 @@ data class Response<T>(
 )
 
 data class ErrorData(
-    @SerializedName("error")
-    val error: Error?
-)
-
-data class Error(
-    @SerializedName("errors")
-    val errors: List<String>?
+    val cod: String,
+    val message: String
 )

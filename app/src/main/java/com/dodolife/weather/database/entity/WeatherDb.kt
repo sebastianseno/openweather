@@ -9,6 +9,7 @@ data class WeatherDb (
     val id : Int,
     val main: String,
     val name: String,
+    val icon: String,
     val description: String,
     val feelsLike: Double,
     val humidity: Double,
