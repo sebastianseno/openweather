@@ -91,7 +91,6 @@ class FindWeatherFragment : BaseFragment() {
                     }
                 }
             }
-
             else -> {
                 Toast.makeText(
                     requireContext(), "Permission denied to read your External storage",

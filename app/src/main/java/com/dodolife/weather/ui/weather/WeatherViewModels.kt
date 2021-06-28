@@ -6,6 +6,7 @@ import com.dodolife.weather.common.ActionLiveData
 import com.dodolife.weather.common.UiState
 import com.dodolife.weather.database.entity.WeatherDb
 import com.dodolife.weather.repo.WeatherRepo
+import com.dodolife.weather.util.UtilityClass
 import kotlinx.coroutines.launch
 
 class WeatherViewModels @ViewModelInject constructor(
@@ -21,27 +22,45 @@ class WeatherViewModels @ViewModelInject constructor(
         Transformations.switchMap(weatherId, repo::findWeather)
 
     val weatherState = ActionLiveData<UiState>()
-    val findweatherState = ActionLiveData<UiState>()
 
+    val findWeatherState = ActionLiveData<UiState>()
 
     fun getWeatherLatLong(lat: Double?, lon: Double?, key: String) {
-        viewModelScope.launch {
-            try {
-                repo.refreshWeather(lat ?: 0.0, lon ?: 0.0, key)
-            } catch (error: Exception) {
-                weatherState.sendAction(UiState.Error(error.message.orEmpty()))
+        if (UtilityClass().isLatLongValid(lat, lon)) {
+            viewModelScope.launch {
+                try {
+                    repo.refreshWeather(lat ?: 0.0, lon ?: 0.0, key)
+                } catch (error: Exception) {
+                    weatherState.sendAction(UiState.Error(error.message.orEmpty()))
+                }
             }
+        } else {
+            weatherState.sendAction(UiState.Error("Failed get your location, please try again"))
         }
     }
 
-    fun getWeatherLatLong(city: String, key: String) {
-        viewModelScope.launch {
-            try {
-                repo.refreshWeatherByCity(city, key)
-                findweatherState.sendAction(UiState.Success)
-            } catch (error: Exception) {
-                findweatherState.sendAction(UiState.Error(error.message.orEmpty()))
+    fun getWeatherByCity(city: String, key: String) {
+        if (areCityInputtedValid(city)) {
+            viewModelScope.launch {
+                runCatching {
+                        repo.refreshWeatherByCity(city, key)
+                    }
+                    .onSuccess {
+                        findWeatherState.postValue(UiState.Success)
+                    }.onFailure {
+                        findWeatherState.postValue(UiState.Error("City not valid."))
+                    }
+                }
             }
+        }
+
+    private fun areCityInputtedValid(city: String): Boolean {
+        return if (!UtilityClass().isCityValid(city)) {
+            findWeatherState.postValue(UiState.Error("Kota yang anda masukan salah"))
+            false
+        } else {
+            findWeatherState.postValue(UiState.Success)
+            true
         }
     }
 }

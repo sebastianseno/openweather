@@ -26,7 +26,7 @@ class WeatherAdapter(
     }
 
     override fun getItemCount(): Int {
-        return items.size
+            return items.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

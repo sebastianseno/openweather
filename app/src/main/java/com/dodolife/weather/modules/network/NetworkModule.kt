@@ -4,14 +4,13 @@ import android.content.Context
 import android.util.Log
 import com.dodolife.weather.BuildConfig
 import com.dodolife.weather.R
-import com.dodolife.weather.services.entity.WeatherData
 import com.dodolife.weather.services.rest.WeatherServices
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.ResponseBody
 import okhttp3.logging.HttpLoggingInterceptor
@@ -24,7 +23,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
-@InstallIn(ApplicationComponent::class)
+@InstallIn(SingletonComponent::class)
 class NetworkModule {
 
     private val timeOut: Int by lazy {
@@ -74,6 +73,7 @@ class NetworkModule {
 //                ResponseInterceptor.getToken = accountManager.getToken()
             }
     }
+
 
     @Provides
     @Singleton

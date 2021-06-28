@@ -33,10 +33,10 @@ class InputCityBottomSheetFragment : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.inputButton.setOnClickListener {
-            viewModel.getWeatherLatLong(binding.inputCity.text.toString(), getString(R.string.api_id))
+            viewModel.getWeatherByCity(binding.inputCity.text.toString(), getString(R.string.api_id))
         }
 
-        viewModel.findweatherState.observe(viewLifecycleOwner, Observer {uiState ->
+        viewModel.findWeatherState.observe(viewLifecycleOwner, Observer { uiState ->
             when (uiState) {
                 UiState.Success -> {dismiss()}
                 is UiState.Error -> Toast.makeText(requireContext(), uiState.message, Toast.LENGTH_SHORT).show()
