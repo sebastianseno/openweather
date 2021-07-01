@@ -45,16 +45,16 @@ class WeatherViewModels @Inject constructor(
         if (areCityInputtedValid(city)) {
             viewModelScope.launch {
                 runCatching {
-                        repo.refreshWeatherByCity(city, key)
-                    }
+                    repo.refreshWeatherByCity(city, key)
+                }
                     .onSuccess {
                         findWeatherState.postValue(UiState.Success)
                     }.onFailure {
                         findWeatherState.postValue(UiState.Error("City not valid."))
                     }
-                }
             }
         }
+    }
 
     private fun areCityInputtedValid(city: String): Boolean {
         return if (!UtilityClass().isCityValid(city)) {

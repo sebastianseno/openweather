@@ -36,9 +36,10 @@ class InputCityBottomSheetFragment : BottomSheetDialogFragment() {
             viewModel.getWeatherByCity(binding.inputCity.text.toString(), getString(R.string.api_id))
         }
 
-        viewModel.findWeatherState.observe(viewLifecycleOwner, Observer { uiState ->
+        viewModel.findWeatherState.observe(viewLifecycleOwner,  { uiState ->
             when (uiState) {
-                UiState.Success -> {dismiss()}
+                UiState.Success -> {
+                }
                 is UiState.Error -> Toast.makeText(requireContext(), uiState.message, Toast.LENGTH_SHORT).show()
             }
         })
