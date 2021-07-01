@@ -1,15 +1,17 @@
 package com.dodolife.weather.ui.weather
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.dodolife.weather.common.ActionLiveData
 import com.dodolife.weather.common.UiState
 import com.dodolife.weather.database.entity.WeatherDb
 import com.dodolife.weather.repo.WeatherRepo
 import com.dodolife.weather.util.UtilityClass
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class WeatherViewModels @ViewModelInject constructor(
+@HiltViewModel
+class WeatherViewModels @Inject constructor(
     private val repo: WeatherRepo
 ) : ViewModel() {
 
